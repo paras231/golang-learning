@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 import (
-    "net/http"
+	"os"
+	"bufio"
 )
 
 func printName() {
@@ -31,10 +32,80 @@ var arr = [4]int{1,2,3,4}
 // 	// calculateSum()
 // }
 
-func main() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
-    })
+// creating files in go
 
-    http.ListenAndServe(":80", nil)
+// func createFile(){
+// 	fmt.Println("writing file...")
+//     file,err := os.Create("test.txt")
+// 	if err != nil{
+// 		panic(err)
+// 	}
+// 	length, err := file.WriteString("welcome to golang" +
+//         "demonstrates reading and writing operations to a file in golang.")
+// 		if err != nil{
+// 			panic(err)
+// 		}
+// 		fmt.Printf("File name: %s", file.Name())
+//     fmt.Printf("\nfile length: %d\n", length)
+// }
+
+// func readFile(){
+// 	fmt.Println("Reading...")
+// 	fileName := "test.txt"
+// 	data, err := os.ReadFile(fileName)
+// 	if err != nil {
+//         panic(err)
+//     }
+// 	fmt.Println("file name " + fileName)
+//     fmt.Printf("file size %d\n", len(data))
+//     fmt.Printf("file content : %s\n", data)
+
+// }
+
+// build cli
+
+func buildCli(){
+	reader := bufio.NewReader(os.Stdin)
+
+    // Ask for filename
+    fmt.Print("Enter filename: ")
+    filename, err := reader.ReadString('\n')
+    if err != nil {
+        fmt.Println("Error reading filename:", err)
+        return
+    }
+
+    // Remove the newline character from filename
+    filename = filename[:len(filename)-1]
+
+    // Ask for file content
+    fmt.Print("Enter content for the file: ")
+    content, err := reader.ReadString('\n')
+    if err != nil {
+        fmt.Println("Error reading content:", err)
+        return
+    }
+
+    // Create the file
+    file, err := os.Create(filename)
+    if err != nil {
+        fmt.Println("Error creating file:", err)
+        return
+    }
+    defer file.Close()
+
+    // Write content to the file
+    _, err = file.WriteString(content)
+    if err != nil {
+        fmt.Println("Error writing to file:", err)
+        return
+    }
+
+    fmt.Println("File created successfully:", filename)
+}
+
+func main() {
+    // createFile()
+	// readFile()
+    buildCli()
 }
