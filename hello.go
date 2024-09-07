@@ -2,9 +2,11 @@ package main
 
 import "fmt"
 import (
-	// "os"
-	// "bufio"
-    "time"
+	"os"
+	"bufio"
+    // "time"
+	"strings"
+	"path/filepath"
 )
 
 func printName() {
@@ -105,6 +107,64 @@ var arr = [4]int{1,2,3,4}
 //     fmt.Println("File created successfully:", filename)
 // }
 
+func checkDirExist(path string)bool{
+	info, err := os.Stat(path)
+	if os.IsNotExist(err) {
+        return false
+    }
+    return info.IsDir()
+}
+
+// calculate directory size
+
+func calculateDirectorySize(dirPath string) (int64, error) {
+	var totalSize int64 = 0
+
+   err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error)error{
+	 if err != nil {
+		return err
+	 }
+	 if !info.IsDir() {
+        totalSize += info.Size()
+	 }
+	 return nil	
+   })
+   if err != nil {
+	return 0, err
+}
+return totalSize, nil
+}
+
+// directory size analyzer
+
+func directorySizeAnalyzer(){
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter directory name: ")
+
+	// Read the directory name from input
+	dirName, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
+
+	// Trim the newline character from the input
+	dirName = strings.TrimSpace(dirName)
+
+	// Check if the directory exists
+	if checkDirExist(dirName) {
+		size,err := calculateDirectorySize(dirName)
+		if err != nil{
+			fmt.Println(err)
+		}
+		fmt.Printf("Total size of directory '%s': %.2f MB\n", dirName, float64(size)/(1024*1024))
+		fmt.Println("Directory exists")
+	} else {
+		fmt.Println("Directory does not exist")
+	}
+   
+}
+
 
 // slices in go
 
@@ -158,8 +218,6 @@ var arr = [4]int{1,2,3,4}
 // channels are used to communicate between goroutines
 
 
-// creating a cli tool for file management system
-
 
 func main() {
     // createFile()
@@ -169,5 +227,6 @@ func main() {
     // time.Sleep(1 * time.Second)
     // go numbers()
     // time.Sleep(1000 * time.Millisecond)
-    fmt.Println("main function")
+	directorySizeAnalyzer()
+    // fmt.Println("main function")
 }
