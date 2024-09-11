@@ -217,7 +217,38 @@ func directorySizeAnalyzer(){
 // channels in go
 // channels are used to communicate between goroutines
 
+// creating channel
 
+
+// func worker(ch chan string){
+//   time.Sleep(2* time.Second)
+//   ch  <- "Data processed"  // send data to channel
+
+// }
+
+
+// Buffered channels
+
+
+// go channels with select
+
+// func sendData(ch1, ch2 chan string){
+// 	time.Sleep(3*time.Second)
+// 	ch1 <- "Data for ch 1" 
+// 	time.Sleep(3*time.Second)
+// 	ch2 <- "Data for ch 2"
+
+// }
+
+//! worker pool with channels
+
+// func worker(id int ,tasks <-chan int, results chan<- int){
+// 	for task := range tasks {
+// 		fmt.Printf("Worker %d processing task %d\n", id, task)
+// 		// time.Sleep(time.Second) // Simulate work
+// 		results <- task * 2      // Send result back
+// 	}
+// }
 
 func main() {
     // createFile()
@@ -227,6 +258,56 @@ func main() {
     // time.Sleep(1 * time.Second)
     // go numbers()
     // time.Sleep(1000 * time.Millisecond)
-	directorySizeAnalyzer()
+	// directorySizeAnalyzer()
     // fmt.Println("main function")
+	// messages := make(chan string)
+	// go func() { messages <- "ping" }()
+	// msg := <-messages
+    // fmt.Println(msg)
+	// ch := make(chan string)
+	// go worker(ch) // start worker goroutine
+	// fmt.Println("Waiting for worker...")
+	// message := <-ch // Receive data from channel
+	// fmt.Println(message)
+
+	// ch := make(chan int , 3)
+	
+	// ch<-1
+	// ch <- 2
+	// ch <- 3
+	// fmt.Println(<-ch) // Outputs 1
+	// fmt.Println(<-ch) // Outputs 2
+	// fmt.Println(<-ch) // Outputs 3
+    
+	// ch1 := make(chan string)
+	// ch2 := make(chan string)
+	// go sendData(ch1, ch2)
+	
+	// for i :=0; i<2; i++ {
+	// 	select{
+	// 	case msg1 := <-ch1:
+	// 		fmt.Println("Received from channel 1",msg1)
+	// 	case msg2 := <-ch2:
+	// 		fmt.Println("Received from ch2:", msg2)	
+	// 	}
+	// }
+	// numOfWorkers := 3
+	// tasks := make(chan int , 200)
+	// results := make(chan int, 200) // Results channel
+
+	// // create a pool of workers
+	// for i := 0; i < numOfWorkers; i++ {
+	// 	go worker(i,tasks,results)
+	// }
+
+	// for t := 1; t <= 200; t++ {
+	// 	tasks <- t
+	// }
+	// close(tasks) // No more tasks will be sent
+
+	// // Collect results
+	// for r := 1; r <= 200; r++ {
+	// 	fmt.Println("Result:", <-results)
+	// }
+
 }
