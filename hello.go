@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // import (
 // 	"os"
@@ -310,18 +312,34 @@ import "fmt"
 // 	}
 // }
 
-func reverseStr(str string) string {
-	runes := []rune(str)
-	reversed := []rune{}
-	for i := len(str) - 1; i >= 0; i-- {
-		reversed = append(reversed, runes[i])
+// func reverseStr(str string) string {
+// 	runes := []rune(str)
+// 	reversed := []rune{}
+// 	for i := len(str) - 1; i >= 0; i-- {
+// 		reversed = append(reversed, runes[i])
+// 	}
+// 	return string(reversed)
+// }
+
+// implelenting binary search
+
+func binarySearch(arr []int, x int) bool {
+	var left int = 0
+	var right int = len(arr) - 1
+	mid := (left + right) / 2
+	for left <= right {
+		if arr[mid] == x {
+			return true
+		} else if arr[mid] < x {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
 	}
-	return string(reversed)
+	return true
 }
 
 func main() {
-	str := "paras"
-	output := reverseStr(str)
-	fmt.Println(output)
-
+	arr := []int{1, 2, 3, 4, 5}
+	fmt.Println(binarySearch(arr, 2))
 }
