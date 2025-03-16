@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // import (
 // 	"os"
@@ -326,8 +324,9 @@ import (
 func binarySearch(arr []int, x int) bool {
 	var left int = 0
 	var right int = len(arr) - 1
-	mid := (left + right) / 2
+
 	for left <= right {
+		mid := (left + right) / 2
 		if arr[mid] == x {
 			return true
 		} else if arr[mid] < x {
@@ -336,10 +335,10 @@ func binarySearch(arr []int, x int) bool {
 			right = mid - 1
 		}
 	}
-	return true
+	return false
 }
 
 func main() {
 	arr := []int{1, 2, 3, 4, 5}
-	fmt.Println(binarySearch(arr, 2))
+	fmt.Println(binarySearch(arr, 7))
 }
