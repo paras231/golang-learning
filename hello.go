@@ -1,28 +1,29 @@
 package main
 
 import "fmt"
-import (
-	"os"
-	"bufio"
-    // "time"
-	"strings"
-	"path/filepath"
-)
 
-func printName() {
-	name := "Paras"
-	fmt.Println(name)
-}
+// import (
+// 	"os"
+// 	"bufio"
+//     // "time"
+// 	"strings"
+// 	"path/filepath"
+// )
 
-func calculateSum(){
-	var a int = 20
-	var b  int = 30
-	fmt.Println(a+b)
-}
+// func printName() {
+// 	name := "Paras"
+// 	fmt.Println(name)
+// }
+
+// func calculateSum(){
+// 	var a int = 20
+// 	var b  int = 30
+// 	fmt.Println(a+b)
+// }
 
 // arrays in golang
 
-var arr = [4]int{1,2,3,4}
+// var arr = [4]int{1,2,3,4}
 
 // main function which executes other code
 
@@ -107,69 +108,67 @@ var arr = [4]int{1,2,3,4}
 //     fmt.Println("File created successfully:", filename)
 // }
 
-func checkDirExist(path string)bool{
-	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
-        return false
-    }
-    return info.IsDir()
-}
+// func checkDirExist(path string)bool{
+// 	info, err := os.Stat(path)
+// 	if os.IsNotExist(err) {
+//         return false
+//     }
+//     return info.IsDir()
+// }
 
 // calculate directory size
 
-func calculateDirectorySize(dirPath string) (int64, error) {
-	var totalSize int64 = 0
+// func calculateDirectorySize(dirPath string) (int64, error) {
+// 	var totalSize int64 = 0
 
-   err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error)error{
-	 if err != nil {
-		return err
-	 }
-	 if !info.IsDir() {
-        totalSize += info.Size()
-	 }
-	 return nil	
-   })
-   if err != nil {
-	return 0, err
-}
-return totalSize, nil
-}
+//    err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error)error{
+// 	 if err != nil {
+// 		return err
+// 	 }
+// 	 if !info.IsDir() {
+//         totalSize += info.Size()
+// 	 }
+// 	 return nil
+//    })
+//    if err != nil {
+// 	return 0, err
+// }
+// return totalSize, nil
+// }
 
 // directory size analyzer
 
-func directorySizeAnalyzer(){
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter directory name: ")
+// func directorySizeAnalyzer(){
+// 	reader := bufio.NewReader(os.Stdin)
+// 	fmt.Print("Enter directory name: ")
 
-	// Read the directory name from input
-	dirName, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("Error reading input:", err)
-		return
-	}
+// 	// Read the directory name from input
+// 	dirName, err := reader.ReadString('\n')
+// 	if err != nil {
+// 		fmt.Println("Error reading input:", err)
+// 		return
+// 	}
 
-	// Trim the newline character from the input
-	dirName = strings.TrimSpace(dirName)
+// 	// Trim the newline character from the input
+// 	dirName = strings.TrimSpace(dirName)
 
-	// Check if the directory exists
-	if checkDirExist(dirName) {
-		size,err := calculateDirectorySize(dirName)
-		if err != nil{
-			fmt.Println(err)
-		}
-		fmt.Printf("Total size of directory '%s': %.2f MB\n", dirName, float64(size)/(1024*1024))
-		fmt.Println("Directory exists")
-	} else {
-		fmt.Println("Directory does not exist")
-	}
-   
-}
+// 	// Check if the directory exists
+// 	if checkDirExist(dirName) {
+// 		size,err := calculateDirectorySize(dirName)
+// 		if err != nil{
+// 			fmt.Println(err)
+// 		}
+// 		fmt.Printf("Total size of directory '%s': %.2f MB\n", dirName, float64(size)/(1024*1024))
+// 		fmt.Println("Directory exists")
+// 	} else {
+// 		fmt.Println("Directory does not exist")
+// 	}
 
+// }
 
 // slices in go
 
 // it takes three args . first is data type , second is length , third is capacity
-
 
 // func sliceUsage(){
 //      // mySlice :=  make([]int , 5 , 10)
@@ -181,7 +180,7 @@ func directorySizeAnalyzer(){
 
 //     // to avoid initial zeros
 //     sliceNew :=  make([]int,0,20)
-    
+
 //     updatedSlice  := append(sliceNew,20,30,40)
 //     fmt.Println(updatedSlice)
 
@@ -197,7 +196,6 @@ func directorySizeAnalyzer(){
 //     elapsed := time.Since(start).Milliseconds()
 //     fmt.Printf("Loop completed in %d ms\n", elapsed)
 // }
-
 
 // goroutines
 
@@ -219,22 +217,19 @@ func directorySizeAnalyzer(){
 
 // creating channel
 
-
 // func worker(ch chan string){
 //   time.Sleep(2* time.Second)
 //   ch  <- "Data processed"  // send data to channel
 
 // }
 
-
 // Buffered channels
-
 
 // go channels with select
 
 // func sendData(ch1, ch2 chan string){
 // 	time.Sleep(3*time.Second)
-// 	ch1 <- "Data for ch 1" 
+// 	ch1 <- "Data for ch 1"
 // 	time.Sleep(3*time.Second)
 // 	ch2 <- "Data for ch 2"
 
@@ -250,64 +245,83 @@ func directorySizeAnalyzer(){
 // 	}
 // }
 
+// func main() {
+//     // createFile()
+// 	// readFile()
+//     // buildCli()
+//     // go createGoroutines()
+//     // time.Sleep(1 * time.Second)
+//     // go numbers()
+//     // time.Sleep(1000 * time.Millisecond)
+// 	// directorySizeAnalyzer()
+//     // fmt.Println("main function")
+// 	// messages := make(chan string)
+// 	// go func() { messages <- "ping" }()
+// 	// msg := <-messages
+//     // fmt.Println(msg)
+// 	// ch := make(chan string)
+// 	// go worker(ch) // start worker goroutine
+// 	// fmt.Println("Waiting for worker...")
+// 	// message := <-ch // Receive data from channel
+// 	// fmt.Println(message)
+
+// 	// ch := make(chan int , 3)
+
+// 	// ch<-1
+// 	// ch <- 2
+// 	// ch <- 3
+// 	// fmt.Println(<-ch) // Outputs 1
+// 	// fmt.Println(<-ch) // Outputs 2
+// 	// fmt.Println(<-ch) // Outputs 3
+
+// 	// ch1 := make(chan string)
+// 	// ch2 := make(chan string)
+// 	// go sendData(ch1, ch2)
+
+// 	// for i :=0; i<2; i++ {
+// 	// 	select{
+// 	// 	case msg1 := <-ch1:
+// 	// 		fmt.Println("Received from channel 1",msg1)
+// 	// 	case msg2 := <-ch2:
+// 	// 		fmt.Println("Received from ch2:", msg2)
+// 	// 	}
+// 	// }
+// 	// numOfWorkers := 3
+// 	// tasks := make(chan int , 200)
+// 	// results := make(chan int, 200) // Results channel
+
+// 	// // create a pool of workers
+// 	// for i := 0; i < numOfWorkers; i++ {
+// 	// 	go worker(i,tasks,results)
+// 	// }
+
+// 	// for t := 1; t <= 200; t++ {
+// 	// 	tasks <- t
+// 	// }
+// 	// close(tasks) // No more tasks will be sent
+
+// 	// // Collect results
+// 	// for r := 1; r <= 200; r++ {
+// 	// 	fmt.Println("Result:", <-results)
+// 	// }
+// 	count := 10
+//     for i := 0; i < count; i++ {
+// 		fmt.Printf("Paras\n")
+// 	}
+// }
+
+func reverseStr(str string) string {
+	runes := []rune(str)
+	reversed := []rune{}
+	for i := len(str) - 1; i >= 0; i-- {
+		reversed = append(reversed, runes[i])
+	}
+	return string(reversed)
+}
+
 func main() {
-    // createFile()
-	// readFile()
-    // buildCli()
-    // go createGoroutines()
-    // time.Sleep(1 * time.Second)
-    // go numbers()
-    // time.Sleep(1000 * time.Millisecond)
-	// directorySizeAnalyzer()
-    // fmt.Println("main function")
-	// messages := make(chan string)
-	// go func() { messages <- "ping" }()
-	// msg := <-messages
-    // fmt.Println(msg)
-	// ch := make(chan string)
-	// go worker(ch) // start worker goroutine
-	// fmt.Println("Waiting for worker...")
-	// message := <-ch // Receive data from channel
-	// fmt.Println(message)
-
-	// ch := make(chan int , 3)
-	
-	// ch<-1
-	// ch <- 2
-	// ch <- 3
-	// fmt.Println(<-ch) // Outputs 1
-	// fmt.Println(<-ch) // Outputs 2
-	// fmt.Println(<-ch) // Outputs 3
-    
-	// ch1 := make(chan string)
-	// ch2 := make(chan string)
-	// go sendData(ch1, ch2)
-	
-	// for i :=0; i<2; i++ {
-	// 	select{
-	// 	case msg1 := <-ch1:
-	// 		fmt.Println("Received from channel 1",msg1)
-	// 	case msg2 := <-ch2:
-	// 		fmt.Println("Received from ch2:", msg2)	
-	// 	}
-	// }
-	// numOfWorkers := 3
-	// tasks := make(chan int , 200)
-	// results := make(chan int, 200) // Results channel
-
-	// // create a pool of workers
-	// for i := 0; i < numOfWorkers; i++ {
-	// 	go worker(i,tasks,results)
-	// }
-
-	// for t := 1; t <= 200; t++ {
-	// 	tasks <- t
-	// }
-	// close(tasks) // No more tasks will be sent
-
-	// // Collect results
-	// for r := 1; r <= 200; r++ {
-	// 	fmt.Println("Result:", <-results)
-	// }
+	str := "paras"
+	output := reverseStr(str)
+	fmt.Println(output)
 
 }
