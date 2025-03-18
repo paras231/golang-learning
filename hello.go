@@ -321,24 +321,67 @@ import "fmt"
 
 // implelenting binary search
 
-func binarySearch(arr []int, x int) bool {
-	var left int = 0
-	var right int = len(arr) - 1
+// func binarySearch(arr []int, x int) bool {
+// 	var left int = 0
+// 	var right int = len(arr) - 1
 
-	for left <= right {
-		mid := (left + right) / 2
-		if arr[mid] == x {
-			return true
-		} else if arr[mid] < x {
-			left = mid + 1
+// 	for left <= right {
+// 		mid := (left + right) / 2
+// 		if arr[mid] == x {
+// 			return true
+// 		} else if arr[mid] < x {
+// 			left = mid + 1
+// 		} else {
+// 			right = mid - 1
+// 		}
+// 	}
+// 	return false
+// }
+
+// implementing Binary Search Tree
+
+type Node struct {
+	value int
+	left  *Node
+	right *Node
+}
+
+// insert node
+func (n *Node) Insert(val int) {
+
+	if val < n.value {
+		fmt.Println(n.left, "left node")
+		if n.left == nil {
+			n.left = &Node{value: val}
 		} else {
-			right = mid - 1
+			n.left.Insert(val)
 		}
+	} else {
+		fmt.Println(n.right, "right node")
+		if n.right == nil {
+			n.right = &Node{value: val}
+		} else {
+			n.right.Insert(val)
+		}
+	}
+}
+
+// search function to search value in BST
+
+func (n *Node) Search(val int) bool {
+	if n == nil {
+		return false
+	}
+	if val == n.value {
+		return true
+	} else if val < n.value {
+		return n.left.Search(val)
+	} else if val > n.value {
+		return n.right.Search(val)
 	}
 	return false
 }
 
 func main() {
-	arr := []int{1, 2, 3, 4, 5}
-	fmt.Println(binarySearch(arr, 7))
+
 }
