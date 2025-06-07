@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 // import (
 // 	"os"
@@ -340,46 +343,99 @@ import "fmt"
 
 // implementing Binary Search Tree
 
-type Node struct {
-	value int
-	left  *Node
-	right *Node
-}
-
-// insert node
-func (n *Node) Insert(val int) {
-
-	if val < n.value {
-		fmt.Println(n.left, "left node")
-		if n.left == nil {
-			n.left = &Node{value: val}
-		} else {
-			n.left.Insert(val)
-		}
-	} else {
-		fmt.Println(n.right, "right node")
-		if n.right == nil {
-			n.right = &Node{value: val}
-		} else {
-			n.right.Insert(val)
-		}
-	}
-}
-
 // search function to search value in BST
 
-func (n *Node) Search(val int) bool {
-	if n == nil {
+func getUser(name string) {
+	fmt.Println(name)
+}
+
+func calculateSum(num int) int {
+	//   running loop by num times
+	result := 0
+	for i := 0; i <= num; i++ {
+		// fmt.Println(i)
+		result += i
+	}
+	return result
+}
+
+func splitUserName(name string) []string {
+	var arr []string // this is a slice in golang , as it is initializes as  empty not an array
+	for i := 0; i < len(name); i++ {
+		// fmt.Println(string(name[i]))
+		arr = append(arr, string(name[i]))
+	}
+	return arr
+}
+
+// structs are object in go
+type User struct {
+	name string
+	age  int
+}
+
+func filterByAge(users []User) []User {
+	var filteredUser []User
+	for i := 0; i < len(users); i++ {
+		user := users[i]
+
+		if user.age > 20 {
+			filteredUser = append(filteredUser, user)
+		}
+	}
+	return filteredUser
+}
+
+type Product struct {
+	name     string
+	price    int
+	category string
+	sold     bool
+}
+
+func readObjects() string {
+	product := Product{
+		name:     "Iphone",
+		category: "Phones",
+		price:    20,
+	}
+	return product.category
+}
+
+func isEven(num int) bool {
+	if num%2 == 0 {
+		return true
+	} else {
 		return false
 	}
-	if val == n.value {
-		return true
-	} else if val < n.value {
-		return n.left.Search(val)
-	} else if val > n.value {
-		return n.right.Search(val)
+}
+
+func concatStrings(a string, b string) string {
+	return a + " " + b
+}
+
+func findMax(nums []int) int {
+
+	sort.Ints(nums)
+	maxVal := nums[len(nums)-1]
+	return maxVal
+}
+
+func reverse(name string) string {
+	//  running a reverse loop
+	for i := len(name) - 1; i >= 0; i-- {
+		fmt.Println(string(name[i]))
 	}
-	return false
+	return ""
+}
+
+func findIndex(arr []string, target string) int {
+	for i := 0; i < len(arr); i++ {
+		if target == string(arr[i]) {
+			return 1
+		}
+	}
+	return -1
 }
 
 func main() {
