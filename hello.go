@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"sort"
 )
 
@@ -438,6 +439,19 @@ func findIndex(arr []string, target string) int {
 	return -1
 }
 
-func main() {
+// basic server endpoint
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome to the Go web server")
+}
 
+// upload file to server
+
+func uploadFile(w http.ResponseWriter , r* http.Request){
+     
+}
+
+func main() {
+	http.HandleFunc("/", homeHandler)
+	fmt.Println("server listening on Port 8080")
+	http.ListenAndServe(":8080", nil) // Start server
 }
